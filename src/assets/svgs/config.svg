@@ -1,0 +1,5 @@
+<svg xml:space="preserve" class="w-6 h-6 cursor-pointer mx-auto" fill="white" viewBox="0 0 22 20" stroke-width="1.2">
+    <circle cx="3" cy="10" r="2" stroke="currentColor"/>
+    <circle cx="11" cy="10" r="2" stroke="currentColor"/>
+    <circle cx="19" cy="10" r="2" stroke="currentColor"/>
+</svg>
