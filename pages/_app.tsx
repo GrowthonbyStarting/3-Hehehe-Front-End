@@ -3,7 +3,6 @@ import type {AppProps} from 'next/app';
 import ClientOnly from '@components/ClientOnly';
 import {BackGround} from '@components/template';
 import {useThemeMode} from '@hooks/media';
-import Portal from '@hooks/Portal';
 import {QueryClient, QueryClientProvider, Hydrate} from '@lib/react-query';
 import {RecoilRoot} from '@lib/recoil';
 import {ThemeProvider} from '@lib/styled-components';

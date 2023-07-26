@@ -8,7 +8,6 @@ import styled from 'styled-components';
 import {backGround, wityIcon, wityLogo, wityTextLogo} from '@assets/png';
 import {Icon, Image as IconImage, Link} from '@components/atom';
 import {useMediaQuery} from '@hooks/media';
-import Portal from "@hooks/Portal";
 
 const TIMEOUT = 300;
 const getTransitionStyles = {
@@ -217,9 +216,6 @@ const BackGround: NextPage<Props> = ({children}) => {
 
   return (
     <>
-      <Portal selector="#portal">
-        {/*<div>asdf</div>*/}
-      </Portal>
       <Canvas ref={canvasRef} width={32} height={32} />
       <Container>
         {show && (
