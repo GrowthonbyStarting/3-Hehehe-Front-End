@@ -6,7 +6,19 @@ import {Transition, TransitionGroup} from 'react-transition-group';
 import styled from 'styled-components';
 
 import {backGround, wityIcon, wityLogo, wityTextLogo} from '@assets/png';
-import {Icon, Image as IconImage, Link} from '@components/atom';
+import {
+  Center,
+  Chart,
+  Config,
+  People,
+  Theme,
+  ShareIcon,
+  PeopleBlack,
+  ThemeBlack,
+  ConfigBlack,
+} from '@assets/svgs';
+import {Image as IconImage, Link} from '@components/atom';
+import EmptyLayout from '@components/template/EmptyLayout';
 import {useMediaQuery} from '@hooks/media';
 
 const TIMEOUT = 300;
@@ -95,7 +107,6 @@ const Header = styled.header`
   align-items: center;
   max-width: inherit;
   display: flex;
-  z-index: 10;
   height: 36px;
   top: 0;
   position: sticky;
@@ -179,11 +190,7 @@ const NavLi = styled.li`
 `;
 
 const MenuContainer = styled.div`
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
+  margin: 10px auto;
 `;
 
 const MenuText = styled.p`
@@ -195,6 +202,7 @@ const MenuText = styled.p`
 type Props = {
   children: ReactNode;
 };
+
 const BackGround: NextPage<Props> = ({children}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const show = useMediaQuery('(min-width: 1280px)');
@@ -264,15 +272,25 @@ const BackGround: NextPage<Props> = ({children}) => {
               </p>
             </LeftHeader>
             <RightHeader>
-              <RightHeaderButton>미리보기</RightHeaderButton>
+              <Link href="/community">
+                <RightHeaderButton>커뮤니티</RightHeaderButton>
+              </Link>
               <ShareButtonContainer>
                 <ShareButton>
-                  <Icon.ShareIcon fill="red" width={36} height={36} />
+                  <ShareIcon />
                 </ShareButton>
               </ShareButtonContainer>
             </RightHeader>
           </Header>
-          <TransitionGroup style={{position: 'relative'}}>
+          <TransitionGroup
+            style={
+              {
+                position: 'relative',
+                height: '100%',
+                background: '#f5f5f5',
+                overflow: 'auto',
+              } as CSSProperties
+            }>
             <Transition
               key={router.pathname}
               timeout={{
@@ -286,9 +304,11 @@ const BackGround: NextPage<Props> = ({children}) => {
                       ...getTransitionStyles[
                         status as keyof typeof getTransitionStyles
                       ],
+                      width: 'inherit',
+                      height: 'inherit',
                     } as CSSProperties
                   }>
-                  {children}
+                  <EmptyLayout>{children}</EmptyLayout>
                 </div>
               )}
             </Transition>
@@ -298,9 +318,7 @@ const BackGround: NextPage<Props> = ({children}) => {
               <NavLi>
                 <Link href="/">
                   <MenuContainer>
-                    <Icon.People
-                      fill={router.pathname === '/' ? 'red' : undefined}
-                    />
+                    {router.pathname === '/' ? <People /> : <PeopleBlack />}
                     <MenuText>페이지</MenuText>
                   </MenuContainer>
                 </Link>
@@ -308,26 +326,24 @@ const BackGround: NextPage<Props> = ({children}) => {
               <NavLi>
                 <Link href="/theme">
                   <MenuContainer>
-                    <Icon.Theme
-                      fill={router.pathname === '/theme' ? 'red' : undefined}
-                    />
+                    {router.pathname === '/theme' ? <Theme /> : <ThemeBlack />}
                     <MenuText>테마</MenuText>
                   </MenuContainer>
                 </Link>
               </NavLi>
               <NavLi>
-                <Icon.Center />
+                <Center />
                 <MenuText>미리보기</MenuText>
               </NavLi>
               <NavLi>
                 <MenuContainer>
-                  <Icon.Chart />
+                  <Chart />
                   <MenuText>분석</MenuText>
                 </MenuContainer>
               </NavLi>
               <NavLi>
                 <MenuContainer>
-                  <Icon.Config />
+                  {router.pathname === '/config' ? <Config /> : <ConfigBlack />}
                   <MenuText>설정</MenuText>
                 </MenuContainer>
               </NavLi>

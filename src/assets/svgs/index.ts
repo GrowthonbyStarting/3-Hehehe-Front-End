@@ -1,6 +1,11 @@
 export {default as ShareIcon} from './share-icon.svg';
 export {default as People} from './people.svg';
+export {default as PeopleBlack} from './people-black.svg';
 export {default as Theme} from './theme.svg';
+export {default as ThemeBlack} from './theme-black.svg';
 export {default as Center} from './center.svg';
 export {default as Config} from './config.svg';
+export {default as ConfigBlack} from './config-black.svg';
 export {default as Chart} from './chart.svg';
+export {default as ChevronUp} from './chevron-up.svg';
+export {default as Avatar} from './avatar.svg';

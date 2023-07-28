@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="106" height="106" viewBox="0 0 106 106" fill="none">
+    <rect width="106" height="106" fill="#F5F5F5"/>
+    <g id="ë©ì¸íë©´01" clip-path="url(#clip0_0_1)">
+        <rect width="375" height="812" transform="translate(-134 -172)" fill="#FAFAFA"/>
+        <g id="Frame 40">
+            <rect x="-114" y="-56" width="334" height="334" rx="12" fill="white"/>
+            <g id="Group 78">
+                <circle id="Ellipse 37" cx="53" cy="53" r="53" fill="#F3F2FC"/>
+                <g id="Isolation_Mode" clip-path="url(#clip1_0_1)">
+                    <path id="Vector" d="M65.3003 52.2719C72.111 45.4612 72.111 34.4189 65.3003 27.6082C58.4897 20.7975 47.4473 20.7975 40.6367 27.6082C33.826 34.4189 33.826 45.4612 40.6367 52.2719C47.4473 59.0826 58.4897 59.0826 65.3003 52.2719Z" fill="white"/>
+                    <path id="Vector_2" d="M82.9361 78.5C81.2439 67.6233 71.8374 59.3004 60.4864 59.3004H45.4487C34.0978 59.3004 24.6912 67.6242 22.999 78.5H82.9352H82.9361Z" fill="white"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <defs>
+        <clipPath id="clip0_0_1">
+            <rect width="375" height="812" fill="white" transform="translate(-134 -172)"/>
+        </clipPath>
+        <clipPath id="clip1_0_1">
+            <rect width="59.9362" height="56" fill="white" transform="translate(23 22.5)"/>
+        </clipPath>
+    </defs>
+</svg>

@@ -8,6 +8,8 @@ import {RecoilRoot} from '@lib/recoil';
 import {ThemeProvider} from '@lib/styled-components';
 import GlobalStyle from '@styles/global-styles';
 import theme, {ColorScheme} from '@styles/theme';
+import 'react-tooltip/dist/react-tooltip.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
