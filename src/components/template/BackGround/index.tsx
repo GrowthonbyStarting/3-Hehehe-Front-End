@@ -5,7 +5,7 @@ import type {CSSProperties, ReactNode} from 'react';
 import {Transition, TransitionGroup} from 'react-transition-group';
 import styled from 'styled-components';
 
-import {backGround, wityIcon, wityLogo, wityTextLogo} from '@assets/png';
+import {backGround, wityTextLogo} from '@assets/png';
 import {
   Center,
   Chart,
@@ -19,7 +19,6 @@ import {
 } from '@assets/svgs';
 import {Image as IconImage, Link} from '@components/atom';
 import EmptyLayout from '@components/template/EmptyLayout';
-import {useMediaQuery} from '@hooks/media';
 
 const TIMEOUT = 300;
 const getTransitionStyles = {
@@ -59,32 +58,6 @@ const Container = styled.div`
   margin-right: 20vw;
   margin-left: auto;
   display: flex;
-`;
-
-const Left = styled.div`
-  @media (min-width: 1000px) {
-    overflow: hidden;
-  }
-  white-space: pre-line;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  max-width: 400px;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  position: relative;
-`;
-
-const TopP = styled.p`
-  font-weight: 700;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-`;
-
-const BottomP = styled.p`
-  line-height: 1.2;
-  font-weight: 400;
 `;
 
 const Right = styled.div`
@@ -205,7 +178,6 @@ type Props = {
 
 const BackGround: NextPage<Props> = ({children}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const show = useMediaQuery('(min-width: 1280px)');
   const router = useRouter();
   useEffect(() => {
     if (canvasRef.current !== null) {
@@ -226,32 +198,6 @@ const BackGround: NextPage<Props> = ({children}) => {
     <>
       <Canvas ref={canvasRef} width={32} height={32} />
       <Container>
-        {show && (
-          <Left>
-            <div style={{position: 'fixed', width: 220}}>
-              <div style={{marginBottom: 220}}>
-                <IconImage
-                  src={wityIcon.src}
-                  width={64}
-                  height={64}
-                  alt="icon"
-                />
-              </div>
-              <div>
-                <IconImage
-                  src={wityLogo.src}
-                  width={120}
-                  height={53}
-                  alt="icon"
-                />
-                <TopP>Witty Web Profile, Wity</TopP>
-                <BottomP>
-                  하나의 링크로 SNS, 이미지, 동영상을 한 번에 표현하세요.
-                </BottomP>
-              </div>
-            </div>
-          </Left>
-        )}
         <Right>
           <Header>
             <IconImage

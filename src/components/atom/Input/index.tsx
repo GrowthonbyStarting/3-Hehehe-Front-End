@@ -1,4 +1,4 @@
-import {ComponentPropsWithRef, FC} from 'react';
+import {ComponentPropsWithRef, CSSProperties, FC} from 'react';
 import styled from 'styled-components';
 
 const HInput = styled.input`
@@ -16,19 +16,22 @@ const HInput = styled.input`
   outline-offset: 2px;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{width?: number}>`
   display: flex;
   overflow: hidden;
   align-items: center;
-  width: 100%;
+  width: ${({width}) => (width ? `${width}px` : '100%')};
   margin-bottom: 0.75rem;
   position: relative;
 `;
-type InputProps = {} & ComponentPropsWithRef<'input'>;
-const Input: FC<InputProps> = props => (
-  <Container>
+type InputProps = {
+  width?: number;
+  style?: CSSProperties;
+} & ComponentPropsWithRef<'input'>;
+const Input: FC<InputProps> = ({style,...restProps}) => (
+  <Container style={style}>
     {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-    <HInput {...props} />
+    <HInput {...restProps} style={style} />
   </Container>
 );
 

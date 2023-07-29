@@ -8,4 +8,6 @@ export {default as Config} from './config.svg';
 export {default as ConfigBlack} from './config-black.svg';
 export {default as Chart} from './chart.svg';
 export {default as ChevronUp} from './chevron-up.svg';
+export {default as ChevronDown} from './chevron-down.svg';
 export {default as Avatar} from './avatar.svg';
+export {default as Trash} from './trash.svg';

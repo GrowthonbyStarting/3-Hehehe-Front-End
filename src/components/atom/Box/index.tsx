@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Container = styled.div<{width?: number}>`
   display: flex;
   width: inherit;
-  margin: 0 auto;
+  margin: 20px auto;
   flex-shrink: 0;
   background-color: #ffffff;
   border-radius: 12px;
