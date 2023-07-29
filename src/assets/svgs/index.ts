@@ -11,3 +11,5 @@ export {default as ChevronUp} from './chevron-up.svg';
 export {default as ChevronDown} from './chevron-down.svg';
 export {default as Avatar} from './avatar.svg';
 export {default as Trash} from './trash.svg';
+export {default as Heart} from './heart.svg';
+export {default as Bookmark} from './bookmark.svg';
