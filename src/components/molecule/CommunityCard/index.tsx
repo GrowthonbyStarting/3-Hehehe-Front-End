@@ -3,7 +3,7 @@ import Popup from 'reactjs-popup';
 import styled from 'styled-components';
 
 import {avatar1, profile1} from '@assets/png';
-import {Bookmark, BookmarkBlack, Close, Heart} from '@assets/svgs';
+import {Bookmark, BookmarkBlack, Close, Heart, HeartBlack} from '@assets/svgs';
 import {Image} from '@components/atom';
 
 const CardContainer = styled.div`
@@ -58,7 +58,7 @@ const IconContainer = styled.div`
   margin-right: 0.5rem;
 `;
 
-const CategoryContainer = styled.div`
+const Category = styled.div`
   text-align: center;
   white-space: nowrap;
   display: flex;
@@ -72,7 +72,8 @@ const CategoryContainer = styled.div`
 `;
 
 const CommunityCard = () => {
-  const [heart, setHeart] = useState(5);
+  const [heart, setHeart] = useState(false);
+  const [count, setCount] = useState(3);
   const [bookmark, setBookmark] = useState(false);
 
   return (
@@ -99,11 +100,7 @@ const CommunityCard = () => {
                 style={{padding: 5}}
               />
               {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
-              <iframe
-                src="https://wity.im/qwef"
-                width={340}
-                height={600}
-              />
+              <iframe src="https://wity.im/qwef" width={340} height={600} />
             </>
           )}
         </Popup>
@@ -118,16 +115,15 @@ const CommunityCard = () => {
           />
           <div style={{marginLeft: 10}}>
             <h3 style={{margin: 0, marginBottom: 4}}>Lena</h3>
-            <CategoryContainer>크리에이터</CategoryContainer>
+            <Category>크리에이터</Category>
           </div>
         </LeftContentContainer>
         <RightContentContainer>
           <IconContainer
             style={{
-              alignItems: 'flex-start',
-              marginRight: 20,
+              marginRight: 10,
               fontSize: 12,
-              fontWeight: 400,
+              fontWeight: 500,
             }}>
             {bookmark ? (
               <Bookmark onClick={() => setBookmark(pre => !pre)} />
@@ -137,8 +133,22 @@ const CommunityCard = () => {
             북마크
           </IconContainer>
           <IconContainer>
-            <Heart onClick={() => setHeart(pre => pre + 1)} />
-            {heart}
+            {heart ? (
+              <Heart
+                onClick={() => {
+                  setHeart(false);
+                  setCount(pre => pre - 1);
+                }}
+              />
+            ) : (
+              <HeartBlack
+                onClick={() => {
+                  setHeart(true);
+                  setCount(pre => pre + 1);
+                }}
+              />
+            )}
+            {count}
           </IconContainer>
         </RightContentContainer>
       </ContentContainer>
