@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  p, h2 {
+    margin: 0;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -40,13 +44,14 @@ const GlobalStyle = createGlobalStyle`
     width: 340px;
     height: 600px;
     border-radius: 10px;
-    border : 0;
+    border: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
-  
+
   .popup-arrow {
     color: rgb(255, 255, 255);
   }
+
   .popup-overlay {
     background: rgba(0, 0, 0, 0.5);
   }

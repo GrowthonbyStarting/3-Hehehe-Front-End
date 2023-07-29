@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import {avatar1, profile1} from '@assets/png';
 import {Bookmark, BookmarkBlack, Close, Heart, HeartBlack} from '@assets/svgs';
-import {Image} from '@components/atom';
+import {Image, TextBox} from '@components/atom';
 
 const CardContainer = styled.div`
   border-radius: 10px;
@@ -58,19 +58,6 @@ const IconContainer = styled.div`
   margin-right: 0.5rem;
 `;
 
-const Category = styled.div`
-  text-align: center;
-  white-space: nowrap;
-  display: flex;
-  padding: 2px 8px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 20px;
-  border: 1px solid #6e63e0;
-  color: #6e63e0;
-`;
-
 const CommunityCard = () => {
   const [heart, setHeart] = useState(false);
   const [count, setCount] = useState(3);
@@ -115,7 +102,9 @@ const CommunityCard = () => {
           />
           <div style={{marginLeft: 10}}>
             <h3 style={{margin: 0, marginBottom: 4}}>Lena</h3>
-            <Category>크리에이터</Category>
+            <TextBox color="#6E63E0" fontSize={12} borderRadius={20}>
+              크리에이터
+            </TextBox>
           </div>
         </LeftContentContainer>
         <RightContentContainer>

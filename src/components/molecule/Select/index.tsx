@@ -48,11 +48,12 @@ const SelectOptions = styled.div<{isOpen: boolean}>`
   opacity: ${props => (props.isOpen ? 1 : 0)};
   overflow: hidden;
   animation: ${fadeIn} 0.2s ease-in-out;
+  z-index: 10;
 `;
 
-const Empty = styled.div`
+const Empty = styled.div<{emptyColor?: string}>`
   padding: 8px;
-  background-color: rgb(250 250 250);
+  background-color: ${({emptyColor}) => emptyColor || 'rgb(250 250 250)'}};
 `;
 
 const Option = styled.div`
@@ -67,10 +68,11 @@ const Option = styled.div`
 type SelectProps = {
   option: {value: string; label: string}[];
   style?: CSSProperties;
+  emptyColor?: string;
 };
 
 const Select: FC<SelectProps> = props => {
-  const {option, style} = props;
+  const {option, style, emptyColor} = props;
   const [selectedOption, setSelectedOption] = useState(option[0].value);
   const [isOpen, setIsOpen] = useState(false);
   const handleOptionSelect = (value: string) => {
@@ -86,7 +88,7 @@ const Select: FC<SelectProps> = props => {
           style={{transform: isOpen ? 'rotate(180deg)' : 'rotate(0)'}}
         />
       </SelectHeader>
-      <Empty />
+      <Empty emptyColor={emptyColor} />
       <SelectOptions isOpen={isOpen}>
         {option.map(({value, label}) => (
           <Option

@@ -169,7 +169,6 @@ const MenuContainer = styled.div`
 const MenuText = styled.p`
   font-weight: 600;
   font-size: 10px;
-  margin-top: 0.25rem;
 `;
 
 type Props = {
@@ -278,8 +277,12 @@ const BackGround: NextPage<Props> = ({children}) => {
                 </Link>
               </NavLi>
               <NavLi>
-                <Center />
-                <MenuText>미리보기</MenuText>
+                <Center
+                  style={{position: 'relative', top: -10} as CSSProperties}
+                />
+                <MenuText style={{position: 'relative', top: -8}}>
+                  미리보기
+                </MenuText>
               </NavLi>
               <NavLi>
                 <MenuContainer>
@@ -288,10 +291,16 @@ const BackGround: NextPage<Props> = ({children}) => {
                 </MenuContainer>
               </NavLi>
               <NavLi>
-                <MenuContainer>
-                  {router.pathname === '/config' ? <Config /> : <ConfigBlack />}
-                  <MenuText>설정</MenuText>
-                </MenuContainer>
+                <Link href="/config">
+                  <MenuContainer>
+                    {router.pathname.split('/')[1] === 'config' ? (
+                      <Config />
+                    ) : (
+                      <ConfigBlack />
+                    )}
+                    <MenuText>설정</MenuText>
+                  </MenuContainer>
+                </Link>
               </NavLi>
             </NavUl>
           </Footer>

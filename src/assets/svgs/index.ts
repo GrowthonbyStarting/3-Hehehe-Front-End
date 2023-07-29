@@ -16,3 +16,4 @@ export {default as HeartBlack} from './heart-black.svg';
 export {default as BookmarkBlack} from './bookmark-black.svg';
 export {default as Bookmark} from './bookmark.svg';
 export {default as Close} from './close.svg';
+export {default as X} from './x.svg';
