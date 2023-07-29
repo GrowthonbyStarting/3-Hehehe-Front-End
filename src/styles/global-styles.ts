@@ -19,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   iframe {
-    overflow-x: hidden;
-    overflow-y: hidden;
+    border: 0;
+    border-radius: 10px;
   }
 
   .close {
@@ -28,10 +28,27 @@ const GlobalStyle = createGlobalStyle`
     position: absolute;
     height: 30px;
     right: -5px;
-    top: -45px;
+    top: -55px;
     background: #6E63E0;
     border-radius: 50%;
     border: 0;
+  }
+
+  .popup-content {
+    margin: auto;
+    background: rgb(255, 255, 255);
+    width: 340px;
+    height: 600px;
+    border-radius: 10px;
+    border : 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .popup-arrow {
+    color: rgb(255, 255, 255);
+  }
+  .popup-overlay {
+    background: rgba(0, 0, 0, 0.5);
   }
 `;
 

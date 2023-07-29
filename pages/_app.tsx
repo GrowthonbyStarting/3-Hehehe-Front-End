@@ -10,7 +10,6 @@ import GlobalStyle from '@styles/global-styles';
 import theme, {ColorScheme} from '@styles/theme';
 import 'react-tooltip/dist/react-tooltip.css';
 import 'react-toastify/dist/ReactToastify.css';
-import 'reactjs-popup/dist/index.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {

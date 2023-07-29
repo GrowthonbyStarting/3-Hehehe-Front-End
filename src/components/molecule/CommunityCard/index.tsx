@@ -87,19 +87,22 @@ const CommunityCard = () => {
               height={profile1.height}
             />
           }
-          contentStyle={{width: 300, height: 500}}
+          position="center center"
           lockScroll
           modal>
           {/* @ts-ignore */}
           {(close: any) => (
             <>
-              <Close className='close' onClick={() => close()}>close</Close>
+              <Close
+                className="close"
+                onClick={() => close()}
+                style={{padding: 5}}
+              />
               {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
               <iframe
                 src="https://wity.im/qwef"
-                width="300px"
-                height="500px"
-                style={{overflow: 'hidden', border: 'none'}}
+                width={340}
+                height={600}
               />
             </>
           )}
