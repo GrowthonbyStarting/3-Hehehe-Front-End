@@ -1,10 +1,10 @@
 import {useState} from 'react';
+import Popup from 'reactjs-popup';
 import styled from 'styled-components';
 
 import {avatar1, profile1} from '@assets/png';
 import {Bookmark, BookmarkBlack, Close, Heart} from '@assets/svgs';
 import {Image} from '@components/atom';
-import Popup from 'reactjs-popup';
 
 const CardContainer = styled.div`
   border-radius: 10px;
