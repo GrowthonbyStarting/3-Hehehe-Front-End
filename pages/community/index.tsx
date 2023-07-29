@@ -26,6 +26,11 @@ const Community: NextPage = () => (
       <Select option={sortOption} />
     </SelectContainer>
     <CommunityCard />
+    <CommunityCard />
+    <CommunityCard />
+    <CommunityCard />
+    <CommunityCard />
+    <CommunityCard />
   </Container>
 );
 

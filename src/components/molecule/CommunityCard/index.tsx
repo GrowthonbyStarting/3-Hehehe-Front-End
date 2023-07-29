@@ -2,12 +2,14 @@ import {useState} from 'react';
 import styled from 'styled-components';
 
 import {avatar1, profile1} from '@assets/png';
-import {Bookmark, Heart} from '@assets/svgs';
+import {Bookmark, BookmarkBlack, Close, Heart} from '@assets/svgs';
 import {Image} from '@components/atom';
+import Popup from 'reactjs-popup';
 
 const CardContainer = styled.div`
   border-radius: 10px;
   background: white;
+  margin-bottom: 1.5rem;
 `;
 
 const ImageContainer = styled.div`
@@ -49,6 +51,7 @@ const RightContentContainer = styled.div`
 `;
 
 const IconContainer = styled.div`
+  white-space: nowrap;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -56,6 +59,7 @@ const IconContainer = styled.div`
 `;
 
 const CategoryContainer = styled.div`
+  text-align: center;
   white-space: nowrap;
   display: flex;
   padding: 2px 8px;
@@ -70,16 +74,36 @@ const CategoryContainer = styled.div`
 const CommunityCard = () => {
   const [heart, setHeart] = useState(5);
   const [bookmark, setBookmark] = useState(false);
+
   return (
     <CardContainer>
       <ImageContainer>
-        <Image
-          alt="profile1"
-          src={profile1.src}
-          width={profile1.width}
-          height={profile1.height}
-          onClick={() => console.log('click')}
-        />
+        <Popup
+          trigger={
+            <Image
+              alt="profile1"
+              src={profile1.src}
+              width={profile1.width}
+              height={profile1.height}
+            />
+          }
+          contentStyle={{width: 300, height: 500}}
+          lockScroll
+          modal>
+          {/* @ts-ignore */}
+          {(close: any) => (
+            <>
+              <Close className='close' onClick={() => close()}>close</Close>
+              {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
+              <iframe
+                src="https://wity.im/qwef"
+                width="300px"
+                height="500px"
+                style={{overflow: 'hidden', border: 'none'}}
+              />
+            </>
+          )}
+        </Popup>
       </ImageContainer>
       <ContentContainer>
         <LeftContentContainer>
@@ -95,12 +119,19 @@ const CommunityCard = () => {
           </div>
         </LeftContentContainer>
         <RightContentContainer>
-          <IconContainer style={{alignItems: 'flex-start', marginRight: 20}}>
-            <Bookmark
-              onClick={() => setBookmark(pre => !pre)}
-              fill={bookmark ? 'yellow' : 'none'}
-            />
-            <br />
+          <IconContainer
+            style={{
+              alignItems: 'flex-start',
+              marginRight: 20,
+              fontSize: 12,
+              fontWeight: 400,
+            }}>
+            {bookmark ? (
+              <Bookmark onClick={() => setBookmark(pre => !pre)} />
+            ) : (
+              <BookmarkBlack onClick={() => setBookmark(pre => !pre)} />
+            )}
+            북마크
           </IconContainer>
           <IconContainer>
             <Heart onClick={() => setHeart(pre => pre + 1)} />

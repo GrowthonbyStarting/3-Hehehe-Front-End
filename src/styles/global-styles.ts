@@ -17,6 +17,22 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+
+  iframe {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .close {
+    cursor: pointer;
+    position: absolute;
+    height: 30px;
+    right: -5px;
+    top: -45px;
+    background: #6E63E0;
+    border-radius: 50%;
+    border: 0;
+  }
 `;
 
 export default GlobalStyle;
