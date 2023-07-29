@@ -76,7 +76,7 @@ const ProfileCard: FC<ProfileCardProps> = props => {
           width: '100%',
         }}>
         <Avatar />
-        <div>
+        <div style={{width: '60%'}}>
           <Input placeholder="한줄로 나를 표현하기" />
           <Select style={{width: '100%'}} option={option} emptyColor="none" />
         </div>
