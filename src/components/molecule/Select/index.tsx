@@ -38,6 +38,7 @@ const SelectHeader = styled.div<{isOpen: boolean}>`
 const SelectOptions = styled.div<{isOpen: boolean}>`
   position: absolute;
   border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.10);
   top: 100%;
   left: 0;
   right: 0;

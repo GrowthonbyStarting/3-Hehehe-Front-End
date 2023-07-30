@@ -1,10 +1,13 @@
 import {useState} from 'react';
 import Popup from 'reactjs-popup';
+import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
 
-import {avatar1, profile1} from '@assets/png';
+import {avatar1, profile1, profileBg1} from '@assets/png';
 import {Bookmark, BookmarkBlack, Close, Heart, HeartBlack} from '@assets/svgs';
 import {Image, TextBox} from '@components/atom';
+// eslint-disable-next-line import/no-cycle
+import {actionButtonShow} from '@components/template/BackGround';
 
 const CardContainer = styled.div`
   border-radius: 10px;
@@ -17,7 +20,9 @@ const ImageContainer = styled.div`
   justify-content: center;
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
-  background: url('${profile1.src}') no-repeat center top/cover,
+  width: 100%;
+  height: ${profileBg1.height}px;
+  background: url('${profileBg1.src}') no-repeat center top/cover,
     linear-gradient(
       180deg,
       rgba(255, 255, 255, 1) 20%,
@@ -58,15 +63,21 @@ const IconContainer = styled.div`
   margin-right: 0.5rem;
 `;
 
+const Iframe = styled.iframe`
+  width: 340px;
+  height: 600px;
+`;
+
 const CommunityCard = () => {
   const [heart, setHeart] = useState(false);
   const [count, setCount] = useState(3);
   const [bookmark, setBookmark] = useState(false);
-
+  const setShow = useSetRecoilState(actionButtonShow);
   return (
     <CardContainer>
       <ImageContainer>
         <Popup
+          onOpen={() => setShow(false)}
           trigger={
             <Image
               alt="profile1"
@@ -80,16 +91,18 @@ const CommunityCard = () => {
           modal>
           {/* @ts-ignore */}
           {(close: any) => (
-            <>
-              <Close
-                className="close"
-                onClick={() => close()}
-                style={{padding: 5}}
-              />
-              {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
-              <iframe src="https://wity.im/qwef" width={340} height={600} />
-            </>
-          )}
+              <>
+                <Close
+                  className="close"
+                  onClick={() => {
+                    close();
+                    setShow(true);
+                  }}
+                  style={{padding: 5, width: 30, height: 30}}
+                />
+                <Iframe src="https://wity.im/qwef" />
+              </>
+            )}
         </Popup>
       </ImageContainer>
       <ContentContainer>

@@ -2,9 +2,7 @@ import React, {ComponentPropsWithRef, FC} from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  border: 0;
   box-sizing: border-box;
-  z-index: 2;
   flex: 1 1 0;
   background-color: rgb(250 250 250);
   padding: 1rem 1rem 72px;

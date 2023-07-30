@@ -3,6 +3,7 @@ import {useRouter} from 'next/router';
 import {useEffect, useRef} from 'react';
 import type {CSSProperties, ReactNode} from 'react';
 import {Transition, TransitionGroup} from 'react-transition-group';
+import {atom, useRecoilValue} from 'recoil';
 import styled from 'styled-components';
 
 import {backGround, wityTextLogo} from '@assets/png';
@@ -18,6 +19,7 @@ import {
   ConfigBlack,
 } from '@assets/svgs';
 import {Image as IconImage, Link} from '@components/atom';
+import FloatingActionButton from '@components/molecule/FloatingActionButton';
 import EmptyLayout from '@components/template/EmptyLayout';
 
 const TIMEOUT = 300;
@@ -49,9 +51,6 @@ const Canvas = styled.canvas`
 `;
 
 const Container = styled.div`
-  @media (min-width: 1280px) {
-    max-width: 1000px;
-  }
   width: 100%;
   min-height: 100vh;
   height: 100%;
@@ -88,7 +87,6 @@ const Header = styled.header`
 const LeftHeader = styled.div`
   cursor: pointer;
   flex: 1 1 0;
-  max-width: 70%;
   display: flex;
   margin-left: 0.75rem;
 `;
@@ -96,23 +94,6 @@ const LeftHeader = styled.div`
 const RightHeader = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const RightHeaderButton = styled.button`
-  border: 0 solid #e5e7eb;
-  box-sizing: border-box;
-  font-family: inherit;
-  font-size: 100%;
-  line-height: inherit;
-  padding: 0;
-  cursor: pointer;
-  margin: 0 0.5rem 0 0;
-  height: 2.25rem;
-  width: 96px;
-  border-radius: 18px;
-  background-color: rgb(243 242 253/1);
-  font-weight: 700;
-  color: rgb(113 99 232/1);
 `;
 
 const ShareButtonContainer = styled.div`
@@ -175,9 +156,15 @@ type Props = {
   children: ReactNode;
 };
 
+export const actionButtonShow = atom({
+  key: 'actionButtonShow',
+  default: true,
+});
+
 const BackGround: NextPage<Props> = ({children}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const router = useRouter();
+  const isShow = useRecoilValue(actionButtonShow);
   useEffect(() => {
     if (canvasRef.current !== null) {
       const canvas = canvasRef.current;
@@ -210,16 +197,12 @@ const BackGround: NextPage<Props> = ({children}) => {
               <p
                 style={{
                   textDecorationLine: 'underline',
-                  overflow: 'hidden',
                   textOverflow: 'ellipsis',
                 }}>
                 han5991
               </p>
             </LeftHeader>
             <RightHeader>
-              <Link href="/community">
-                <RightHeaderButton>커뮤니티</RightHeaderButton>
-              </Link>
               <ShareButtonContainer>
                 <ShareButton>
                   <ShareIcon />
@@ -269,12 +252,10 @@ const BackGround: NextPage<Props> = ({children}) => {
                 </Link>
               </NavLi>
               <NavLi>
-                <Link href="/theme">
-                  <MenuContainer>
-                    {router.pathname === '/theme' ? <Theme /> : <ThemeBlack />}
-                    <MenuText>테마</MenuText>
-                  </MenuContainer>
-                </Link>
+                <MenuContainer>
+                  {router.pathname === '/theme' ? <Theme /> : <ThemeBlack />}
+                  <MenuText>테마</MenuText>
+                </MenuContainer>
               </NavLi>
               <NavLi>
                 <Center
@@ -303,6 +284,7 @@ const BackGround: NextPage<Props> = ({children}) => {
                 </Link>
               </NavLi>
             </NavUl>
+            {isShow && <FloatingActionButton />}
           </Footer>
         </Right>
       </Container>

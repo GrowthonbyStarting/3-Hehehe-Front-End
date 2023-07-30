@@ -11,15 +11,15 @@ const SubTitle = styled.h2`
   margin-top: 0;
 `;
 const Bookmark = () => (
-  <Container>
-    <SubTitle>북마크</SubTitle>
-    <CommunityCard />
-    <CommunityCard />
-    <CommunityCard />
-    <CommunityCard />
-    <CommunityCard />
-    <CommunityCard />
-  </Container>
+    <Container>
+        <SubTitle>북마크</SubTitle>
+        <CommunityCard />
+        <CommunityCard />
+        <CommunityCard />
+        <CommunityCard />
+        <CommunityCard />
+        <CommunityCard />
+    </Container>
 );
 
 export default Bookmark;
