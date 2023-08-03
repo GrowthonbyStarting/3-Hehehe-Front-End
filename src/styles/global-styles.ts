@@ -41,8 +41,8 @@ const GlobalStyle = createGlobalStyle`
   .popup-content {
     margin: auto;
     background: rgb(255, 255, 255);
-    width: 340px;
-    height: 600px;
+    width: 300px;
+    height: 400px;
     border-radius: 10px;
     border: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
