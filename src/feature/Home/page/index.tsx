@@ -46,18 +46,34 @@ const SwitchContainer = styled.div`
   padding: 0.75rem 0 0.5rem;
 `;
 
+const Container = styled.div`
+  width: inherit;
+`;
+
+const AvatarContainer = styled.div`
+  margin: 40px;
+`;
+
+const ImageContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 13px;
+`
+
 const Home: NextPage = () => {
   const [checked, setChecked] = useState(false);
   const [checked2, setChecked2] = useState(false);
   return (
-    <div style={{width: 'inherit'}}>
+    <Container>
       <Box>
         <IconContainer>
           <ChevronUp />
         </IconContainer>
-        <div style={{margin: 40}}>
+        <AvatarContainer>
           <Avatar />
-        </div>
+        </AvatarContainer>
         <Input placeholder="한줄로 나를 표현하기" />
       </Box>
       <ButtonContainer>
@@ -98,14 +114,7 @@ const Home: NextPage = () => {
           🔗&nbsp;&nbsp;링크
           <ChevronUp />
         </IconContainer>
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: 13,
-          }}>
+        <ImageContainer>
           <Image
             src="https://www.google.com/s2/favicons?domain=wity.im%26size%3D48&w=96&q=75"
             alt="image"
@@ -113,9 +122,17 @@ const Home: NextPage = () => {
             height={44}
             style={{marginRight: 12}}
           />
-          <Input placeholder="위티 사용법" value='위티 홈페이지' spellCheck={false} style={{marginBottom: 0}} />
-        </div>
-        <Input placeholder="한줄로 나를 표현하기" value='https://www.wity.im/' />
+          <Input
+            placeholder="위티 사용법"
+            value="위티 홈페이지"
+            spellCheck={false}
+            style={{marginBottom: 0}}
+          />
+        </ImageContainer>
+        <Input
+          placeholder="한줄로 나를 표현하기"
+          value="https://www.wity.im/"
+        />
         <SwitchContainer>
           <Switch
             height={20}
@@ -129,7 +146,7 @@ const Home: NextPage = () => {
           <Trash />
         </SwitchContainer>
       </Box>
-    </div>
+    </Container>
   );
 };
 

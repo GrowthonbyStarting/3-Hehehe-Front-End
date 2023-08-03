@@ -20,6 +20,7 @@ const StyleTextBox = styled.div<TextBoxProps>`
   border-radius: ${({borderRadius}) => borderRadius}px;
   border: 1px solid ${({color}) => color};
   color: ${({color}) => color};
+  max-width: 50px;
 `;
 
 const TextBox: FC<TextBoxProps> = props => {

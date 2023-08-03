@@ -11,6 +11,14 @@ const nextConfig = {
     });
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: "/:path*",
+        destination: "http://hehehe.moim.link/:path*",
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

@@ -1,12 +1,13 @@
-import {useState} from 'react';
+import axios from 'axios';
+import {FC, useState} from 'react';
 import Popup from 'reactjs-popup';
 import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
 
-import {avatar1, profile1, profileBg1} from '@assets/png';
+import {option} from '@/constants/Community';
+import db, {type ProfileIds} from '@/constants/UserProfile';
 import {Bookmark, BookmarkBlack, Close, Heart, HeartBlack} from '@assets/svgs';
 import {Image, TextBox} from '@components/atom';
-// eslint-disable-next-line import/no-cycle
 import {actionButtonShow} from '@components/template/BackGround';
 
 const CardContainer = styled.div`
@@ -15,14 +16,14 @@ const CardContainer = styled.div`
   margin-bottom: 1.5rem;
 `;
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<{height: number; src: string}>`
   display: flex;
   justify-content: center;
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
   width: 100%;
-  height: ${profileBg1.height}px;
-  background: url('${profileBg1.src}') no-repeat center top/cover,
+  height: ${({height}) => height}px;
+  background: url('${({src}) => src}') no-repeat center top/cover,
     linear-gradient(
       180deg,
       rgba(255, 255, 255, 1) 20%,
@@ -68,22 +69,34 @@ const Iframe = styled.iframe`
   height: 600px;
 `;
 
-const CommunityCard = () => {
-  const [heart, setHeart] = useState(false);
-  const [count, setCount] = useState(3);
-  const [bookmark, setBookmark] = useState(false);
+type CommunityCardProps = {
+  profileId: ProfileIds;
+  category: string;
+  like?: number;
+  bookMark?: boolean;
+};
+
+const CommunityCard: FC<CommunityCardProps> = props => {
+  const {profileId, category, like = 0, bookMark = false} = props;
+  const [heart, setHeart] = useState(like > 0);
+  const [count, setCount] = useState(like);
+  const [bookmark, setBookmark] = useState(bookMark);
   const setShow = useSetRecoilState(actionButtonShow);
+  const {profile, profileBg, avatar, shareLink, nickName} = db[profileId];
+
+  const lavel = option.find(e => e.value === category)?.label as string;
+
   return (
     <CardContainer>
-      <ImageContainer>
+      <ImageContainer height={profileBg.height} src={profileBg.src}>
         <Popup
           onOpen={() => setShow(false)}
           trigger={
             <Image
               alt="profile1"
-              src={profile1.src}
-              width={profile1.width}
-              height={profile1.height}
+              src={profile.src}
+              width={profile.width}
+              height={profile.height}
             />
           }
           position="center center"
@@ -91,32 +104,34 @@ const CommunityCard = () => {
           modal>
           {/* @ts-ignore */}
           {(close: any) => (
-              <>
-                <Close
-                  className="close"
-                  onClick={() => {
-                    close();
-                    setShow(true);
-                  }}
-                  style={{padding: 5, width: 30, height: 30}}
-                />
-                <Iframe src="https://wity.im/qwef" />
-              </>
-            )}
+            <>
+              <Close
+                className="close"
+                onClick={() => {
+                  close();
+                  setShow(true);
+                }}
+                style={{padding: 5, width: 30, height: 30}}
+              />
+              <Iframe src={shareLink} />
+            </>
+          )}
         </Popup>
       </ImageContainer>
       <ContentContainer>
         <LeftContentContainer>
           <Image
-            src={avatar1.src}
-            width={avatar1.width}
-            height={avatar1.height}
+            src={avatar.src}
+            width={avatar.width}
+            height={avatar.height}
             alt="avatar1"
           />
           <div style={{marginLeft: 10}}>
-            <h3 style={{margin: 0, marginBottom: 4}}>Lena</h3>
+            <h3 style={{margin: 0, marginBottom: 4, whiteSpace: 'nowrap'}}>
+              {nickName}
+            </h3>
             <TextBox color="#6E63E0" fontSize={12} borderRadius={20}>
-              크리에이터
+              {lavel}
             </TextBox>
           </div>
         </LeftContentContainer>
@@ -128,9 +143,31 @@ const CommunityCard = () => {
               fontWeight: 500,
             }}>
             {bookmark ? (
-              <Bookmark onClick={() => setBookmark(pre => !pre)} />
+              <Bookmark
+                onClick={() => {
+                  axios
+                    .delete('/api/profile/bookmark', {
+                      data: {
+                        profileId,
+                      },
+                    })
+                    .then(() => {
+                      setBookmark(pre => !pre);
+                    });
+                }}
+              />
             ) : (
-              <BookmarkBlack onClick={() => setBookmark(pre => !pre)} />
+              <BookmarkBlack
+                onClick={() => {
+                  axios
+                    .post('/api/profile/bookmark', {
+                      profileId,
+                    })
+                    .then(() => {
+                      setBookmark(pre => !pre);
+                    });
+                }}
+              />
             )}
             북마크
           </IconContainer>
@@ -138,15 +175,29 @@ const CommunityCard = () => {
             {heart ? (
               <Heart
                 onClick={() => {
-                  setHeart(false);
-                  setCount(pre => pre - 1);
+                  axios
+                    .delete('/api/profile/like', {
+                      data: {
+                        profileId,
+                      },
+                    })
+                    .then(() => {
+                      setHeart(false);
+                      setCount(pre => pre - 1);
+                    });
                 }}
               />
             ) : (
               <HeartBlack
                 onClick={() => {
-                  setHeart(true);
-                  setCount(pre => pre + 1);
+                  axios
+                    .post('/api/profile/like', {
+                      profileId,
+                    })
+                    .then(() => {
+                      setHeart(true);
+                      setCount(pre => pre + 1);
+                    });
                 }}
               />
             )}

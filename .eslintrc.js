@@ -30,6 +30,7 @@ module.exports = {
     },
   ],
   rules: {
+    'dot-notation': 'off',
     'react/jsx-filename-extension': [
       'error',
       {extensions: ['.ts', '.tsx', '.jsx']},

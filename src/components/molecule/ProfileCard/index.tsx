@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React, {FC, useState} from 'react';
 import Switch from 'react-switch';
+import {ToastContainer, toast} from 'react-toastify';
 import styled from 'styled-components';
 
 import {option} from '@/constants/Community';
@@ -39,12 +41,18 @@ const NickName = styled.div`
   padding: 8px;
 `;
 type ProfileCardProps = {
+  profileId: number;
   currentProfile?: boolean;
+  category: string;
+  nickname?: string;
 };
 
 const ProfileCard: FC<ProfileCardProps> = props => {
-  const {currentProfile} = props;
+  const {currentProfile, category, nickname, profileId} = props;
   const [checked, setChecked] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(category);
+  const notify = () => toast('Wow so easy!');
+
   return (
     <Box>
       <div
@@ -60,7 +68,7 @@ const ProfileCard: FC<ProfileCardProps> = props => {
             display: 'flex',
             alignItems: 'center',
           }}>
-          <NickName>Lena</NickName>
+          <NickName>{nickname}</NickName>
           {currentProfile && (
             <TextBox color="#6E63E0" fontSize={14} borderRadius={4}>
               현재 프로필
@@ -78,7 +86,22 @@ const ProfileCard: FC<ProfileCardProps> = props => {
         <Avatar />
         <div style={{width: '60%'}}>
           <Input placeholder="한줄로 나를 표현하기" />
-          <Select style={{width: '100%'}} option={option} emptyColor="none" />
+          <Select
+            value={selectedOption}
+            onChangeValue={() => {
+              axios
+                .put('/api/profile/category', {
+                  profileId,
+                  category: selectedOption,
+                })
+                .then(res => {
+                  setSelectedOption(res.data);
+                });
+            }}
+            style={{width: '100%'}}
+            options={option}
+            emptyColor="none"
+          />
         </div>
       </div>
       <div style={{width: '100%', display: 'flex', justifyContent: 'flex-end'}}>
@@ -89,12 +112,16 @@ const ProfileCard: FC<ProfileCardProps> = props => {
           checkedIcon={false}
           uncheckedIcon={false}
           checked={checked}
-          onChange={() => setChecked(pre => !pre)}
+          onChange={() => {
+            notify();
+            setChecked(pre => !pre);
+          }}
         />
       </div>
       <ButtonContainer style={{width: '100%'}}>
         <Button type="button">공유하기</Button>
       </ButtonContainer>
+      <ToastContainer />
     </Box>
   );
 };

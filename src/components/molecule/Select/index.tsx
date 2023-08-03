@@ -38,7 +38,7 @@ const SelectHeader = styled.div<{isOpen: boolean}>`
 const SelectOptions = styled.div<{isOpen: boolean}>`
   position: absolute;
   border-radius: 6px;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   top: 100%;
   left: 0;
   right: 0;
@@ -67,35 +67,35 @@ const Option = styled.div`
 `;
 
 type SelectProps = {
-  option: {value: string; label: string}[];
+  options: {value: string; label: string}[];
   style?: CSSProperties;
   emptyColor?: string;
+  value: string;
+  onChangeValue: (value: string) => void;
 };
 
 const Select: FC<SelectProps> = props => {
-  const {option, style, emptyColor} = props;
-  const [selectedOption, setSelectedOption] = useState(option[0].value);
+  const {options, style, emptyColor, value, onChangeValue} = props;
   const [isOpen, setIsOpen] = useState(false);
-  const handleOptionSelect = (value: string) => {
-    setSelectedOption(value);
+  const handleOptionSelect = (optionValue: string) => {
+    onChangeValue(optionValue);
     setIsOpen(false);
   };
-
   return (
     <SelectContainer style={style}>
       <SelectHeader isOpen={isOpen} onClick={() => setIsOpen(pre => !pre)}>
-        {option.find(options => options.value === selectedOption)?.label}
+        {options.find(option => option.value === value)?.label}
         <StyledArrow
           style={{transform: isOpen ? 'rotate(180deg)' : 'rotate(0)'}}
         />
       </SelectHeader>
       <Empty emptyColor={emptyColor} />
       <SelectOptions isOpen={isOpen}>
-        {option.map(({value, label}) => (
+        {options.map(option => (
           <Option
-            key={value}
-            onClick={() => handleOptionSelect(value)}>
-            {label}
+            key={option.value}
+            onClick={() => handleOptionSelect(option.value)}>
+            {option.label}
           </Option>
         ))}
       </SelectOptions>

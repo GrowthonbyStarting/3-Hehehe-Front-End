@@ -2,6 +2,7 @@
   "name": "hehehe-front-end",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://hehehe.moim.link",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
