@@ -7,11 +7,6 @@ type LinkProps = {children?: ReactNode; style?: CSSProperties} & NLinkProps;
 
 const SLink = styled(NLink)`
   text-decoration: none;
-  //color: ${({theme}) => theme.color.text[700]};
-
-  // &:hover {
-  //   color: ${({theme}) => theme.color.text[400]};
-  // }
 ` as typeof NLink;
 
 const Link: FC<LinkProps> = props => {

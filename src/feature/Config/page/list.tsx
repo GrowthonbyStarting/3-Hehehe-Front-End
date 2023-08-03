@@ -62,9 +62,9 @@ const List = () => {
   return (
     <div>
       <Tooltip id="profile-tooltip" style={{zIndex: 10}}>
-        <p>각 프로필 우측 토글 버튼 활성화 시 해당</p>
-        <p>프로필은 커뮤니티에</p>
-        <p>자동 업로드됩니다. 변경 사항 발생 시</p>
+        <p style={{marginBottom: 5}}>각 프로필 우측 토글 버튼 활성화 시 해당</p>
+        <p style={{marginBottom: 5}}>프로필은 커뮤니티에</p>
+        <p style={{marginBottom: 5}}>자동 업로드됩니다. 변경 사항 발생 시</p>
         <p>자동으로 변경 업로드 됩니다.</p>
       </Tooltip>
       <div
