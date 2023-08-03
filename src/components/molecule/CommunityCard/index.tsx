@@ -74,15 +74,26 @@ type CommunityCardProps = {
   category: string;
   like?: number;
   bookMark?: boolean;
+  nickName: string;
+  shareLink: string;
+  setDataList?: any;
 };
 
 const CommunityCard: FC<CommunityCardProps> = props => {
-  const {profileId, category, like = 0, bookMark = false} = props;
+  const {
+    profileId,
+    category,
+    like = 0,
+    bookMark = false,
+    nickName,
+    shareLink,
+    setDataList,
+  } = props;
   const [heart, setHeart] = useState(like > 0);
   const [count, setCount] = useState(like);
   const [bookmark, setBookmark] = useState(bookMark);
   const setShow = useSetRecoilState(actionButtonShow);
-  const {profile, profileBg, avatar, shareLink, nickName} = db[profileId];
+  const {profile, profileBg, avatar} = db[profileId] || db[99];
 
   const lavel = option.find(e => e.value === category)?.label as string;
 
@@ -149,10 +160,16 @@ const CommunityCard: FC<CommunityCardProps> = props => {
                     .delete('/api/profile/bookmark', {
                       data: {
                         profileId,
+                        userId: 2,
                       },
                     })
                     .then(() => {
                       setBookmark(pre => !pre);
+                      if (setDataList) {
+                        setDataList((pre: any) =>
+                          pre.filter((e: any) => e.profileId !== profileId),
+                        );
+                      }
                     });
                 }}
               />
@@ -162,6 +179,7 @@ const CommunityCard: FC<CommunityCardProps> = props => {
                   axios
                     .post('/api/profile/bookmark', {
                       profileId,
+                      userId: 2,
                     })
                     .then(() => {
                       setBookmark(pre => !pre);
@@ -179,6 +197,7 @@ const CommunityCard: FC<CommunityCardProps> = props => {
                     .delete('/api/profile/like', {
                       data: {
                         profileId,
+                        userId: 2,
                       },
                     })
                     .then(() => {
@@ -193,6 +212,7 @@ const CommunityCard: FC<CommunityCardProps> = props => {
                   axios
                     .post('/api/profile/like', {
                       profileId,
+                      userId: 2,
                     })
                     .then(() => {
                       setHeart(true);

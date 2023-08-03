@@ -32,16 +32,16 @@ const ActionButton = styled.button<{active: boolean}>`
   transition: all 0.3s;
 
   ${props =>
-    props.active &&
-    css`
-      box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.19),
+      props.active &&
+      css`
+        box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.19),
         0 12px 15px 0 rgba(0, 0, 0, 0.24);
 
-      svg {
-        transition: all 0.3s;
-        transform: scale(1.5) rotate(-45deg);
-      }
-    `}
+        svg {
+          transition: all 0.3s;
+          transform: scale(1.5) rotate(-45deg);
+        }
+      `}
 `;
 
 const ActionsList = styled.ul`
@@ -103,6 +103,7 @@ const PopupContainer = styled.div`
   background: rgba(0, 0, 0, 0.6);
   z-index: 50;
 `;
+
 const FloatingActionButton = () => {
   const [isActive, setIsActive] = useState(false);
   const route = useRouter();

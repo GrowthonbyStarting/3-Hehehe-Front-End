@@ -42,7 +42,7 @@ const db = {
     shareLink: 'https://www.wity.im/testfile',
   },
   5: {
-    nickName: '초보 개발자',
+    nickName: '이인호',
     avatar: avatar4,
     profile: profile4,
     profileBg: profileBg4,
@@ -62,6 +62,13 @@ const db = {
     profileBg: profileBg6,
     shareLink: 'https://www.wity.im/bigtyno',
   },
+  99: {
+    nickName: '초보 개발자',
+    avatar: avatar2,
+    profile: profile2,
+    profileBg: profileBg3,
+    shareLink: 'https://www.wity.im/bigtyno',
+  }
 };
 
 export type ProfileIds = keyof typeof db;

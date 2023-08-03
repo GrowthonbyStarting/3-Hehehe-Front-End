@@ -51,7 +51,13 @@ const Button = styled.button`
 const List = () => {
   const [profileList, setProfileList] = useState<any[]>([]);
   useEffect(() => {
-    axios.get('/api/profile/multi').then(res => setProfileList(res.data));
+    axios
+      .get('/api/profile/multi', {
+        params: {
+          user: 2,
+        },
+      })
+      .then(res => setProfileList(res.data));
   }, []);
   return (
     <div>
@@ -77,6 +83,7 @@ const List = () => {
       </ButtonContainer>
       {profileList.map(profile => (
         <ProfileCard
+          share={profile.share}
           key={profile.profileId}
           profileId={profile.profileId}
           currentProfile={profile.profileStatus}

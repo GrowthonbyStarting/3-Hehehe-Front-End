@@ -23,12 +23,20 @@ const SubTitle = styled.h2`
 
 const Community: NextPage = () => {
   const [profileList, setProfileList] = useState([]);
+  const [profileListSort, setProfileListSort] = useState([]);
   const [selectedOption, setSelectedOption] = useState(option[0].value);
   const [sortOptions, setSortOption] = useState(sortOption[0].value);
   useEffect(() => {
     axios
-      .get('/api/profile/community')
-      .then(res => setProfileList(res.data.content));
+      .get('/api/profile/community', {
+        params: {
+          user: 2,
+        },
+      })
+      .then(res => {
+        setProfileList(res.data.content);
+        setProfileListSort(res.data.content);
+      });
   }, []);
 
   return (
@@ -39,16 +47,30 @@ const Community: NextPage = () => {
           options={option}
           style={{marginRight: 20}}
           value={selectedOption}
-          onChangeValue={setSelectedOption}
+          onChangeValue={value => {
+            setSelectedOption(value);
+            setProfileListSort(
+              profileList.filter((profile: any) => profile.category === value),
+            );
+          }}
         />
         <Select
           options={sortOption}
           value={sortOptions}
-          onChangeValue={setSortOption}
+          onChangeValue={sortType => {
+            if (sortType === 'new') {
+              profileList.sort((a: any, b: any) => b.updatedAt - a.updatedAt);
+            } else {
+              profileList.sort((a: any, b: any) => b.likes - a.likes);
+            }
+            setSortOption(sortType);
+          }}
         />
       </SelectContainer>
-      {profileList.map((profile: any) => (
+      {profileListSort.map((profile: any) => (
         <CommunityCard
+          nickName={profile.nickName}
+          shareLink={profile.shareLink}
           profileId={profile.profileId}
           category={profile.category}
           key={profile.profileId}
