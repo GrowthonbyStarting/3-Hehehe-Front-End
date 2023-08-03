@@ -65,8 +65,8 @@ const IconContainer = styled.div`
 `;
 
 const Iframe = styled.iframe`
-  width: 340px;
-  height: 600px;
+  width: 300px;
+  height: 400px;
 `;
 
 type CommunityCardProps = {
