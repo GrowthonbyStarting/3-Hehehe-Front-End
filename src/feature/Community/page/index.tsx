@@ -58,11 +58,13 @@ const Community: NextPage = () => {
           options={sortOption}
           value={sortOptions}
           onChangeValue={sortType => {
+            const copy = [...profileList];
             if (sortType === 'new') {
-              profileList.sort((a: any, b: any) => b.updatedAt - a.updatedAt);
+              copy.sort((a: any, b: any) => b.updatedAt - a.updatedAt);
             } else {
-              profileList.sort((a: any, b: any) => b.likes - a.likes);
+              copy.sort((a: any, b: any) => b.likes - a.likes);
             }
+            setProfileListSort(copy);
             setSortOption(sortType);
           }}
         />
